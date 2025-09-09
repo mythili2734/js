@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Information</title>
+  
+</head>
+<body>
+  <h2>Weather Info</h2>
+  <div class="container">
+    <input id="city" placeholder="Enter city name">
+    <button id="search">Search</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById("search").onclick = () => {
+      let city = document.getElementById("city").value.trim();
+      let result = document.getElementById("result");
+
+      if (!city) {
+        result.innerHTML = "<p>Please enter a city name.</p>";
+        return;
+      }
+
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=b9e2ef1154c3d78cb616a9c476489060`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.cod != 200) {
+            result.innerHTML = "<p>City not found!</p>";
+            return;
+          }
+
+          result.innerHTML = `
+            <p><b>Weather:</b> ${data.weather[0].description}</p>
+            <p><b>Temperature:</b> ${data.main.temp}°C</p>
+            <p><b>Humidity:</b> ${data.main.humidity}%</p>
+            <p><b>Pressure:</b> ${data.main.pressure} hPa</p>
+            <p><b>Latitude:</b> ${data.coord.lat}</p>
+            <p><b>Longitude:</b> ${data.coord.lon}</p>
+          `;
+        })
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is Fetch page</h1>
+    <h2>Setup:<span id="setup"></span></h2>
+    <h3>Punchline:<span id="punchline"></span></h3>
+    <button id="btn">Generate Jock</button>
+
+
+    <script>
+        let setup = document.getElementById("setup");
+        let punchline = document.getElementById("punchline");
+        let btn = document.getElementById("btn");
+        btn.addEventListener("click",function(){
+        fetch("https://official-joke-api.appspot.com/random_joke")
+        .then(response => response.json())
+        // .then(result => {
+        //     console.log(result.setup)
+        //     console.log(result.punchline)
+        //  });
+        .then(result =>{
+            setup.innerText = result.setup;
+            punchline.innerText = result.punchline;
+        });
+        });
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather forecast</title>
+</head>
+<body>
+    <input type="text" id="city" placeholder="Enter city">
+    <button id="search">Search</button>
+      <div id="weather"></div>
+    <script>
+        document.getElementById("search").addEventListener("click", () => {
+            let city = document.getElementById("city").value;
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=b9e2ef1154c3d78cb616a9c476489060`)
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById("weather").innerHTML = `
+                    <h2>Coordinates</h2>
+                    <p>Latitude: ${result.coord.lat}</p>
+                    <p>Longitude: ${result.coord.lon}</p>
+                    <h2>Weather</h2>
+                    <p>description: ${result.weather[0].description}</p>
+                    <h2>Main</h2>
+                    <p>Temperature: ${result.main.temp}</p>
+                    <p>Humidity: ${result.main.humidity}</p>
+                    <p>Pressure: ${result.main.pressure} </p>
+                    <p>Condition: ${result.weather[0].description}</p>
+                    <h2>Wind</h2>
+                    <p>Speed: ${result.wind.speed}</p>`;
+            });
+        });
+    </script>
+</body>
+</html>

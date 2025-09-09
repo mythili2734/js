@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delish Dine | Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Delish Dine</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to Delish Dine</h2>
+    <p>Delicious food, delivered to your door.</p>
+    <a href="#menu" class="btn">See Menu</a>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="https://images.pexels.com/photos/17050759/pexels-photo-17050759.jpeg" alt="Unlimited Buffet">
+        <h3>Unlimited Buffet</h3>
+        <p>Enjoy unlimited servings of our best dishes, desserts, and drinks.</p>
+        <span class="price">₹899</span>
+        <p class="offer">Special Offer: 20% OFF Today!</p>
+        <button onclick="addToCart('Unlimited Buffet', 899)">Add to Cart</button>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.pexels.com/photos/7813572/pexels-photo-7813572.jpeg" alt="Pizza">
+        <h3>Margherita Pizza</h3>
+        <p>Classic cheese pizza with fresh tomatoes & basil.</p>
+        <span class="price">₹299</span>
+        <button onclick="addToCart('Margherita Pizza', 299)">Add to Cart</button>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.pexels.com/photos/9609864/pexels-photo-9609864.jpeg" alt="Biriyani">
+        <h3>Chicken Biriyani</h3>
+        <p>Fragrant basmati rice cooked with tender chicken & aromatic spices.</p>
+        <span class="price">₹299</span>
+        <button onclick="addToCart('Chicken Biriyani', 299)">Add to Cart</button>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg" alt="Burger">
+        <h3>Cheese Burger</h3>
+        <p>Juicy grilled beef with melted cheddar cheese.</p>
+        <span class="price">₹249</span>
+        <button onclick="addToCart('Cheese Burger', 249)">Add to Cart</button>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg" alt="Pasta">
+        <h3>Italian Pasta</h3>
+        <p>Rich creamy sauce with fresh herbs & parmesan.</p>
+        <span class="price">₹199</span>
+        <button onclick="addToCart('Italian Pasta', 199)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

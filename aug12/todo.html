@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .completed{
+            text-decoration: line-through;
+            color: rgb(203, 207, 211);
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="" id="task" placeholder="Enter task">
+    <button id="btn">Add task</button>
+    <ol id="taskList"></ol>
+    <script>
+        let task=document.getElementById("task");
+        let btn = document.getElementById("btn");
+        let taskList = document.getElementById("taskList");
+
+        window.onload=()=>{
+            let availableTasks = JSON.parse(localStorage.getItem("tasks")||"[]");
+            availableTasks.forEach(element => {
+                loadTask(element);
+            });
+        }
+
+        const loadTask = (task)=>{
+            let newTask = document.createElement("li");
+            let span = document.createElement("span");
+            if(task.completed){
+                span.className="completed";
+            }
+            span.innerText=task.text;
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerText ="Delete";
+            deleteBtn.addEventListener("click",()=>{
+                newTask.remove();
+                removeTask(task.text);
+            })
+
+            let completeBtn=document.createElement("button");
+            completeBtn.innerText="Complete";
+            completeBtn.addEventListener("click",()=>{
+                toggleStatus(task.text);
+            })
+
+            newTask.appendChild(span);
+            newTask.appendChild(completeBtn);
+            newTask.appendChild(deleteBtn);
+
+            taskList.appendChild(newTask);
+        }
+
+        btn.addEventListener("click",()=>{
+            let taskText=task.value
+            let newTask = document.createElement("li");
+            let span = document.createElement("span");
+            span.innerText=taskText;
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerText ="Delete";
+            deleteBtn.addEventListener("click",()=>{
+                newTask.remove();
+                removeTask(taskText);
+            })
+
+            let completeBtn=document.createElement("button");
+            completeBtn.innerText="Complete";
+            completeBtn.addEventListener("click",()=>{
+                toggleStatus(taskText);
+            })
+
+            newTask.appendChild(span);
+            newTask.appendChild(completeBtn);
+            newTask.appendChild(deleteBtn);
+
+            taskList.appendChild(newTask);
+
+        let taskObj = {"text":task.value,"completed":false}
+        let availableTasks = JSON.parse(localStorage.getItem("tasks")|| "[]");
+        availableTasks.push(taskObj);
+        localStorage.setItem("tasks",JSON.stringify(availableTasks)
+        );
+        })
+
+        const removeTask =(taskText)=>{
+            let availableTasks = JSON.parse(localStorage.getItem("tasks"));
+            availableTasks=availableTasks.filter(x=>x.text !== taskText);
+            localStorage.setItem("tasks",JSON.stringify(availableTasks))
+        }
+
+        const toggleStatus = (taskText)=>{
+            let availableTasks  = JSON.parse(localStorage.getItem("tasks"));
+            availableTasks=availableTasks.map(x=>{
+                if(x.text === taskText){
+                    x.completed = !x.completed;
+                }
+                return x;
+            })
+            localStorage.setItem("tasks",JSON.stringify(availableTasks));
+            taskList.textContent=""
+            let at  = JSON.parse(localStorage.getItem("tasks"));
+            at.forEach(x=>{
+                loadTask(x)
+            })
+        }
+    </script>
+</body>
+</html>
+
+<!-- 1.AddTask-Adding task to dom,adding task to localStorage
+2.DeleteTask-Delete task from dom,delete task from local storage -->

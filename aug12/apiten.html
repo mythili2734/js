@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .joke{
+        border: 2px solid black;
+        margin: 10px;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+ 
+    <div id="jokes"></div>
+    <script>
+        let jokes = document.getElementById("jokes");  
+        fetch("https://official-joke-api.appspot.com/random_ten")
+        .then(response =>response.json())
+        .then(result=>{
+            result.forEach(element => {
+               displayJoke(element);
+            })
+        })
+        function displayJoke(joke){
+            let newJoke = document.createElement("div");
+            newJoke.className = "joke";
+            let setup = document.createElement("p");
+            setup.innerHTML= `<b>Setup:</b> ${joke.Setup}`;
+            let punchline = document.createElement("p");
+            punchline.innerHTML= `<b>Punchline:</b>${joke.punchline}`;
+            newJoke.appendChild(setup);
+            newJoke.appendChild(punchline);
+            jokes.appendChild(newJoke);
+
+        }
+
+    </script>
+</body>
+</html>

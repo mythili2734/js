@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies List</title>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #container div {
+            flex: 1 0 200px;
+            max-width: 200px;
+            margin: 10px;
+            padding: 10px;
+            background-color: #383535;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        #container h2 {
+            font-size: 1rem;
+            margin: 10px 0 5px;
+        }
+        #container p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+        const container = document.getElementById("container");
+
+        fetch("https://moviesapi.ir/api/v1/movies")
+            .then(response => response.json())
+            .then(data => {
+                data.data.forEach(movie => {
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <img src="${movie.poster}" alt="${movie.title}">
+                        <h2>${movie.title}</h2>
+                        <h2>⭐ ${movie.imdb_rating}</h2>
+                        <p>${movie.year}</p>
+                        <button>Crime</button>
+                        <button>Drama</button>
+                    `;
+                    container.appendChild(div);
+                });
+            })
+
+    </script>
+</body>
+</html>
